@@ -1,0 +1,8 @@
+Flask
+Flask-RESTful
+flask-swagger-ui
+SQLAlchemy
+Flask-SQLAlchemy
+flask-marshmallow
+pandas
+flask_testing

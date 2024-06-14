@@ -1,0 +1,135 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Weather Crop API",
+    "version": "1.0.0"
+  },
+  "basePath": "/api",
+  "schemes": ["http"],
+  "paths": {
+    "/weather": {
+      "get": {
+        "summary": "Get weather data",
+        "description": "Returns paginated weather data with optional filtering by station ID and date range.",
+        "parameters": [
+          {
+            "name": "station_id",
+            "in": "query",
+            "type": "integer",
+            "description": "Filter by station ID"
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "description": "Filter by start date"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "description": "Filter by end date"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "integer",
+            "description": "Page number for pagination"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "type": "integer",
+            "description": "Number of items per page for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "total_items": { "type": "integer" },
+                "page": { "type": "integer" },
+                "per_page": { "type": "integer" },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "integer" },
+                      "station_id": { "type": "integer" },
+                      "date": { "type": "string", "format": "date" },
+                      "max_temp": { "type": "integer" },
+                      "min_temp": { "type": "integer" },
+                      "precipitation": { "type": "integer" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/weather/stats": {
+      "get": {
+        "summary": "Get weather statistics",
+        "description": "Returns paginated weather statistics with optional filtering by station ID and date range.",
+        "parameters": [
+          {
+            "name": "station_id",
+            "in": "query",
+            "type": "integer",
+            "description": "Filter by station ID"
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by year"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "integer",
+            "description": "Page number for pagination"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "type": "integer",
+            "description": "Number of items per page for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "total_items": { "type": "integer" },
+                "page": { "type": "integer" },
+                "per_page": { "type": "integer" },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "station_id": { "type": "integer" },
+                      "avg_max_temp": { "type": "number", "format": "float" },
+                      "avg_min_temp": { "type": "number", "format": "float" },
+                      "total_precipitation": { "type": "number", "format": "float" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
